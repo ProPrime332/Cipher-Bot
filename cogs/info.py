@@ -23,6 +23,12 @@ class info(commands.Cog):
         embed = discord.Embed(title="Invite Link", description="https://discord.com/oauth2/authorize/?permissions=1341644481&scope=bot&client_id=742647318767075338", color=0x261a38)
         await ctx.send(embed=embed)
 
+    @commands.command(name='dev')
+    async def dev(self, ctx):
+        " " " Info about developers of the bot. " " "
+        embed = discord.Embed(title='Devs', description='This bot is developerd by Prime and ceres.')
+        await ctx.send(embed=embed)    
+
 
 def setup(bot):
     bot.add_cog(info(bot))
