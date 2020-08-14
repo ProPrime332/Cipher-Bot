@@ -13,7 +13,7 @@ class fun(commands.Cog):
     @commands.command(name='choose', help='Settles the score someway')
     async def choose(self, ctx, *choices):
         """Settles the score someway."""
-        await ctx.send(random.choices(choices))
+        await ctx.send(random.choices(choices)[0])
 
     @commands.command(name='kill', help='Gives a random kill response.')
     async def kill(self, ctx, *, user):
