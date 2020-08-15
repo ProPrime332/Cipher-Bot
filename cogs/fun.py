@@ -29,8 +29,13 @@ class fun(commands.Cog):
     @commands.command(name='wow')
     async def wow(self, ctx):
         """Sends a WOW gif."""
-        wows = ['https://tenor.com/view/yawnface-gif-4425271', 'https://tenor.com/view/wow-ted-gif-4233186' ]
+        wows = ['https://tenor.com/view/yawnface-gif-4425271', 'https://tenor.com/view/wow-ted-gif-4233186']
         await ctx.send(random.choices(wows)[0])
+
+    @commands.command(name='green', aliases=['gt', '>'])
+    async def green(self, ctx, *, args):
+        """sends greentext of the args"""
+        await ctx.send(f"```css\n{args}```")
 
     @commands.command(name='ascii')
     async def ascii(self, ctx, *, inp: str):
