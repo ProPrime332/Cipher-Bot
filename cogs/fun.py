@@ -23,13 +23,14 @@ class fun(commands.Cog):
     @commands.command(name='dm')
     async def dm(self, ctx, user: discord.User, *, message):
         """Sends the specified user a DM."""
-        await user.send(f'{ctx.author} sent you a message read it pls *:{message}*')
+        await user.send(f'{ctx.author} has a message for you *:{message}*')
         await ctx.send(f'Sent a message to {user}')
 
     @commands.command(name='wow')
     async def wow(self, ctx):
         """Sends a WOW gif."""
-        await ctx.send('https://tenor.com/view/wow-ted-gif-4233186')
+        wows = ['https://tenor.com/view/yawnface-gif-4425271', 'https://tenor.com/view/wow-ted-gif-4233186' ]
+        await ctx.send(random.choices(wows)[0])
 
     @commands.command(name='ascii')
     async def ascii(self, ctx, *, inp: str):
