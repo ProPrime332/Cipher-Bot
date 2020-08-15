@@ -1,7 +1,7 @@
 from discord.ext import commands
 import discord
 from config import token, initial_cogs
-
+from discord.ext.commands.errors import NoPrivateMessage
 
 from aiohttp import ClientSession
 import datetime
@@ -23,6 +23,17 @@ class Helper(commands.AutoShardedBot):
         for ext in initial_cogs:
             self.load_extension(ext)
 
+    async def process_commands(self, message):
+        ctx = await self.get_context(message)
+        if ctx.command is None:
+            return
+        if ctx.guild is None:
+            raise NoPrivateMessage
+
+    async def on_message(self, message):
+        if message.author.bot:
+            return
+        await self.process_commands(message)
     @classmethod
     async def setup(cls, **kwargs):
         bot = cls()
