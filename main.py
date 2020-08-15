@@ -29,6 +29,7 @@ class Helper(commands.AutoShardedBot):
             return
         if ctx.guild is None:
             raise NoPrivateMessage
+        await self.invoke(ctx)
 
     async def on_message(self, message):
         if message.author.bot:
