@@ -28,6 +28,7 @@ class Helper(commands.AutoShardedBot):
         if ctx.command is None:
             return
         if ctx.guild is None:
+            await ctx.send('Commands can\'t be used in DM')
             raise NoPrivateMessage
         await self.invoke(ctx)
 
