@@ -19,6 +19,6 @@ class CommandErrorHandler(commands.Cog):
         if isinstance(error, MissingRequiredArgument):
             await ctx.send(f'Pls provide the required arguments, for more info use {ctx.prefix}help')
 
-
 def setup(bot):
     bot.add_cog(CommandErrorHandler(bot))
+
