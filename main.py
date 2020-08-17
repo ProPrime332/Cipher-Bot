@@ -1,7 +1,7 @@
 from discord.ext import commands
 import discord
 from config import token, initial_cogs
-from discord.ext.commands.errors import NoPrivateMessage
+from discord.ext.commands.errors import NoPrivateMessage, BadArgument, MissingRequiredArgument, CommandNotFound
 
 from aiohttp import ClientSession
 import datetime
@@ -28,14 +28,28 @@ class Helper(commands.AutoShardedBot):
         if ctx.command is None:
             return
         if ctx.guild is None:
-            await ctx.send('Commands can\'t be used in DM')
-            raise NoPrivateMessage
+            await ctx.send("no commands in private messages")
         await self.invoke(ctx)
 
     async def on_message(self, message):
         if message.author.bot:
             return
         await self.process_commands(message)
+
+    async def on_command_error(self, ctx, error):
+        print(type(error))
+        if isinstance(error, BadArgument):
+            await ctx.send(f'Pls provide the correct arguments, for more info use {ctx.prefix}help')
+            await ctx.send_help(ctx.command)
+        elif isinstance(error, MissingRequiredArgument):
+            await ctx.send(f'Pls provide the required arguments, for more info use {ctx.prefix}help')
+            await ctx.send_help(ctx.command)
+        elif isinstance(error, CommandNotFound):
+            await ctx.send("thats not a vaild command dude")
+            await ctx.send_help()
+        else:
+            await ctx.send(f"command raised an error {error}")
+
     @classmethod
     async def setup(cls, **kwargs):
         bot = cls()
