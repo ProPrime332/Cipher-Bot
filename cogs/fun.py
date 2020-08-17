@@ -42,7 +42,7 @@ class fun(commands.Cog):
         inp = pyfiglet.figlet_format(inp)
         await ctx.send(f'```{inp}```')
 
-    @commands.command(name='ball', aliases=['8ball'])
+    @commands.command(name='8ball')
     async def ball(self, ctx, *, response):
         responses = ['Cannot predict now.',
                      ' Concentrate and ask again.',
