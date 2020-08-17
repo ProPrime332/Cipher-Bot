@@ -44,6 +44,7 @@ class fun(commands.Cog):
 
     @commands.command(name='8ball')
     async def ball(self, ctx, *, response):
+        """Brings the 8ball magic to discord"""
         responses = ['Cannot predict now.',
                      ' Concentrate and ask again.',
                      'Don’t count on it.',
@@ -63,6 +64,11 @@ class fun(commands.Cog):
                      'You may rely on it.'
                      ]
         await ctx.send(random.choices(responses)[0])
+
+    @commands.command(name='insult')
+    async def insult(self, ctx, *, user):
+        """Insults the mentioned user"""
+        await ctx.send(f'I\'d slap you {user} but it would be animal abuse.')
 
 
 def setup(bot):

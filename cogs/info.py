@@ -27,8 +27,13 @@ class info(commands.Cog):
     async def dev(self, ctx):
         " " " Info about developers of the bot. " " "
         embed = discord.Embed(title='Devs', description='This bot is developerd by Prime and ceres.')
-        await ctx.send(embed=embed)    
+        await ctx.send(embed=embed)
 
+    @commands.command(name='ping')
+    async def ping(self, ctx):
+        " " " Info about developers of the bot. " " "
+        embed = discord.Embed(title='Ping', description=f'Here is your Ping:\n```{round(self.bot.latency * 1000)}ms```')
+        await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(info(bot))
