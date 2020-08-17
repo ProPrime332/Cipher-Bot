@@ -1,7 +1,7 @@
 from discord.ext import commands
 import discord
 from config import token, initial_cogs
-from discord.ext.commands.errors import NoPrivateMessage, BadArgument, MissingRequiredArgument, CommandNotFound
+from discord.ext.commands.errors import BadArgument, MissingRequiredArgument, CommandNotFound
 
 from aiohttp import ClientSession
 import datetime
@@ -29,6 +29,7 @@ class Helper(commands.AutoShardedBot):
             return
         if ctx.guild is None:
             await ctx.send("no commands in private messages")
+            return
         await self.invoke(ctx)
 
     async def on_message(self, message):
