@@ -16,7 +16,7 @@ class fun(commands.Cog):
         await ctx.send(random.choices(choices)[0])
 
     @commands.command(name='kill', help='Gives a random kill response.')
-    async def kill(self, ctx, *, user):
+    async def kill(self, ctx, *, user : discord.User):
         """Gives a random kill response."""
         await ctx.send(f"Ooh you killed {user}")
 
@@ -66,7 +66,7 @@ class fun(commands.Cog):
         await ctx.send(random.choices(responses)[0])
 
     @commands.command(name='insult')
-    async def insult(self, ctx, *, user):
+    async def insult(self, ctx, *, user : discord.User):
         """Insults the mentioned user"""
         await ctx.send(f'I\'d slap you {user} but it would be animal abuse.')
 
