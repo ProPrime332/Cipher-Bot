@@ -41,7 +41,7 @@ class fun(commands.Cog):
     async def ascii(self, ctx, *, inp: str):
         inp = pyfiglet.figlet_format(inp)
         await ctx.send(f'```{inp}```')
-
+        
     @commands.command(name='8ball')
     async def ball(self, ctx, *, response):
         """Brings the 8ball magic to discord"""

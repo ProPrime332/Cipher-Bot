@@ -7,7 +7,7 @@ class Users(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='avatar')
+    @commands.command(name='avatar', aliases=['av'])
     async def avatar(self, ctx,  *,  member : discord.Member):
         """Displays the avatar of mentioned user."""
         avatar_user = member.avatar_url
