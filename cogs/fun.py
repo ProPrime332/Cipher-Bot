@@ -16,7 +16,7 @@ class fun(commands.Cog):
         await ctx.send(random.choices(choices)[0])
 
     @commands.command(name='kill', help='Gives a random kill response.')
-    async def kill(self, ctx, *, user):
+    async def kill(self, ctx, *, user : discord.User):
         """Gives a random kill response."""
         await ctx.send(f"Ooh you killed {user}")
 
@@ -41,9 +41,10 @@ class fun(commands.Cog):
     async def ascii(self, ctx, *, inp: str):
         inp = pyfiglet.figlet_format(inp)
         await ctx.send(f'```{inp}```')
-
+        
     @commands.command(name='8ball')
     async def ball(self, ctx, *, response):
+        """Brings the 8ball magic to discord"""
         responses = ['Cannot predict now.',
                      ' Concentrate and ask again.',
                      'Don’t count on it.',
@@ -63,6 +64,11 @@ class fun(commands.Cog):
                      'You may rely on it.'
                      ]
         await ctx.send(random.choices(responses)[0])
+
+    @commands.command(name='insult')
+    async def insult(self, ctx, *, user : discord.User):
+        """Insults the mentioned user"""
+        await ctx.send(f'I\'d slap you {user} but it would be animal abuse.')
 
 
 def setup(bot):

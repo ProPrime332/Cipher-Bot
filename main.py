@@ -19,7 +19,7 @@ class Helper(commands.AutoShardedBot):
 
     async def on_ready(self):
         print(f'Successfully logged in as {self.user}\nSharded to {len(self.guilds)} guilds')
-        await self.change_presence(status=discord.Status.online, activity=discord.Game(name=f'use the prefix *'))
+        await self.change_presence(status=discord.Status.online, activity=discord.Game(name=f'use the prefix * | Watching {len(self.guilds)} servers.'))
         for ext in initial_cogs:
             self.load_extension(ext)
 

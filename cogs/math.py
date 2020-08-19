@@ -1,5 +1,5 @@
 from discord.ext import commands
-
+import discord
 
 class Math(commands.Cog):
     """Maths Commands to help you."""

@@ -69,7 +69,7 @@ class Help(commands.HelpCommand):
         for category, cmds in itertools.groupby(filtered, key=get_category):
             if cmds:
                 embed.add_field(name=f'**{category}**', value=', '.join(self.command_or_group(*cmds)), inline=False)
-        embed.add_field(name="Join our support server", value="[Support Server](https://discord.gg/734hPZH)")
+        embed.add_field(name="Join our support server", value="[Support Server](https://discord.gg/6nG92Rc)")
 
         await self.context.send(embed=embed)
 
