@@ -14,7 +14,7 @@ class info(commands.Cog):
         " " " Link to support server. " " "
         embed = discord.Embed(title="Support", description="For Support ", color=0x261a38)
         embed.add_field(name="꧁༒Prime༒꧂#0410", value="Ask him", inline=False)
-        embed.add_field(name="Join Support server at ", value="https://discord.gg/cvpvxqd", inline=False)
+        embed.add_field(name="Join Support server at ", value="https://discord.gg/6nG92Rc", inline=False)
         await ctx.send(embed=embed)
 
     @commands.command(name='invite')
