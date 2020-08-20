@@ -1,21 +1,40 @@
-from discord.ext import commands
+import asyncio
+import datetime
+
 import discord
-from config import token, initial_cogs
+import json
+from aiohttp import ClientSession
+from discord.ext import commands
 from discord.ext.commands.errors import BadArgument, MissingRequiredArgument, CommandNotFound
 
-from aiohttp import ClientSession
-import datetime
-import asyncio
+from config import token, initial_cogs
+
+
+def get_prefix(bot, message):
+    with open('cogs/json/prefix.json', 'r') as f:
+        prefixes = json.load(f)
+    try:
+        return prefixes[str(message.guild.id)]
+    except KeyError:
+        with open('cogs/json/prefix.json', 'w') as f:
+            prefixes[str(message.guild.id)] = '.'
+            json.dump(prefixes, f, indent=4)
 
 
 class Helper(commands.AutoShardedBot):
     def __init__(self, **kwargs):
-        super().__init__(command_prefix=kwargs.pop('command_prefix', ['*']), case_insensitive=True, **kwargs)
+        super().__init__(command_prefix=kwargs.pop('command_prefix', get_prefix), case_insensitive=True, **kwargs)
         self.session = ClientSession(loop=self.loop)
         self.start_time = datetime.datetime.utcnow()
         self.clean_text = commands.clean_content(escape_markdown=True, fix_channel_mentions=True)
 
     """"  Events  """
+    async def on_guild_join(self, guild):
+        with open('cogs/json/prefix.json', 'r') as f:
+            prefixes = json.load(f)
+        prefixes[str(guild.id)] = '.'
+        with open('cogs/json/prefix.json', 'w') as f:
+            json.dump(prefixes, f, indent=4)
 
     async def on_ready(self):
         print(f'Successfully logged in as {self.user}\nSharded to {len(self.guilds)} guilds')
