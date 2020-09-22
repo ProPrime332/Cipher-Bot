@@ -13,5 +13,7 @@ class Users(commands.Cog):
         avatar_user = member.avatar_url
         await ctx.send(str(avatar_user))
 
+
+
 def setup(bot):
     bot.add_cog(Users(bot))

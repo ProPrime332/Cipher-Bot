@@ -40,16 +40,16 @@ class Helper(commands.AutoShardedBot):
     async def on_command_error(self, ctx, error):
         print(type(error))
         if isinstance(error, BadArgument):
-            await ctx.send(f'Pls provide the correct arguments, for more info use {ctx.prefix}help')
-            await ctx.send_help(ctx.command)
+            embed = discord.Embed(color=0xff0000, description=f"Pls provide the correct arguments, for more info use {ctx.prefix}help")
+            await ctx.send(embed=embed)
         elif isinstance(error, MissingRequiredArgument):
-            await ctx.send(f'Pls provide the required arguments, for more info use {ctx.prefix}help')
-            await ctx.send_help(ctx.command)
+            embed = discord.Embed(color=0xff0000, description=f"Pls provide the required arguments, for more info use {ctx.prefix}help")
+            await ctx.send(embed=embed)
         elif isinstance(error, CommandNotFound):
-            await ctx.send("thats not a vaild command dude")
-            await ctx.send_help()
+            embed = discord.Embed(color=0xff0000, description=f"Use a valid command dude,\nfor commands use{ctx.prefix}help")
+            await ctx.send(embed=embed)
         else:
-            await ctx.send(f"command raised an error {error}")
+            print(error)
 
     @classmethod
     async def setup(cls, **kwargs):
