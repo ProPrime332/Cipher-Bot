@@ -6,12 +6,16 @@ class Users(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        self.emoji = '🧑'
 
     @commands.command(name='avatar', aliases=['av'])
-    async def avatar(self, ctx,  *,  member : discord.Member):
+    async def avatar(self, ctx,  *,  member : discord.Member = None):
+        member = member or ctx.author
         """Displays the avatar of mentioned user."""
         avatar_user = member.avatar_url
-        await ctx.send(str(avatar_user))
+        embed = discord.Embed(title=f"{member}'s avatar")
+        embed.set_image(url=avatar_user)
+        await ctx.send(embed=embed)
 
 
 

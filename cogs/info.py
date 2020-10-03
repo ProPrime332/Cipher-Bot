@@ -8,6 +8,7 @@ class info(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        self.emoji = 'ℹ'
 
     @commands.command(name='support')
     async def support(self, ctx):

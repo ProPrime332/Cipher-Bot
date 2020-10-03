@@ -3,6 +3,9 @@ from discord.ext import commands
 import random
 import pyfiglet
 import praw
+import discord
+from datetime import datetime
+
 
 
 reddit = praw.Reddit(client_id = "KqUKz_3IJiHQTA",
@@ -17,11 +20,13 @@ class fun(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.embed_colour = discord.Colour.from_rgb(252, 102, 0)
+        self.emoji = '🎪'
 
     @commands.command(name='choose', help='Settles the score someway')
     async def choose(self, ctx, *choices):
         """Settles the score someway."""
         await ctx.send(random.choices(choices)[0])
+        await ctx.message.delete()
 
     @commands.command(name='kill', help='Gives a random kill response.')
     async def kill(self, ctx, *, user : discord.User):
@@ -45,20 +50,23 @@ class fun(commands.Cog):
                  f"{user.mention} was killed by $author with baby wipes.",
                  f"{user.mention} dies in a horrible accident, and it was engineered by {ctx.author.mention}.",
                  f"{user.mention} dies of starvation."]
-        await ctx.send(random.choices(kills)[0])
+        embed = discord.Embed(title=f"**{ctx.author} killed {user}**", description=random.choices(kills)[0])
+        await ctx.send(embed=embed)
+        await ctx.message.delete()
 
     @commands.command(name='dm')
     async def dm(self, ctx, user: discord.User, *, message):
         """Sends the specified user a DM."""
         await user.send(f'{message}\n\n**{ctx.author}**')
         await ctx.send(f'Sent a message to {user}')
+        await ctx.message.delete()
 
     @commands.command(name="meme")
     async def meme(self, ctx):
         """ Sends a meme """
         img = reddit.subreddit("meme").random()
         img = img.url
-        embed = discord.Embed(title="A meme", color=self.embed_colour)
+        embed = discord.Embed(title="A meme", color=self.embed_colour, timestamp=datetime.utcnow())
         embed.set_image(url=img)
         await ctx.send(embed=embed)
         await ctx.message.delete()
@@ -75,11 +83,13 @@ class fun(commands.Cog):
     async def green(self, ctx, *, args):
         """sends greentext of the args"""
         await ctx.send(f"```css\n{args}```")
+        await ctx.message.delete()
 
     @commands.command(name='ascii')
     async def ascii(self, ctx, *, inp: str):
         inp = pyfiglet.figlet_format(inp)
         await ctx.send(f'```{inp}```')
+        await ctx.message.delete()
 
     @commands.command(name='8ball')
     async def ball(self, ctx, *, response):
@@ -102,8 +112,9 @@ class fun(commands.Cog):
                      'Yes – definitely.',
                      'You may rely on it.'
                      ]
-        await ctx.send(random.choices(responses)[0])
-
+        embed = discord.Embed(title=f"**The 8ball has spoken**", description=random.choices(responses)[0])
+        await ctx.send(embed=embed)
+        await ctx.message.delete()
     @commands.command(name='insult')
     async def insult(self, ctx, *, user : discord.User):
         """Insults the mentioned user"""
@@ -126,7 +137,9 @@ class fun(commands.Cog):
                   'I’m betting your keyboard is filthy as fuck now from all that Cheeto-dust finger typing, you goddamn weaboo shut in.',
                   'WHY SHOULD I LISTEN TO YOU ARE SO FAT THAT YOU CAN\'T POO OR PEE YOU STINK LYRE YOU HAVE A CRUSH ON POO',
                   'I curse the vagina that farted you out.']
-        await ctx.send(random.choices(roasts)[0])
+        embed = discord.Embed(title=f"**{ctx.author} roasted {user}**", description=random.choices(roasts)[0])
+        await ctx.send(embed=embed)
+        await ctx.message.delete()
 
 
 def setup(bot):

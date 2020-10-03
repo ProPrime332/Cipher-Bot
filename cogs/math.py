@@ -6,7 +6,7 @@ class Math(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-
+        self.emoji = '➗'
     @commands.command(name='add', help='Adds 2 given numbers.')
     async def asu(self, ctx, number1: int, number2: int = 0):
         """Adds the 2 numbers given."""
